@@ -7,30 +7,31 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    /**
-     * \Illuminate\Http\Response
-     */
     public function index()
     {
+        $users = User::all();
+
+        if ($users->isEmpty()) return response()->json(null, 404);
+
         return response()->json(User::all(), 200);
     }
 
-    public function create(): \Illuminate\Http\Response
+    public function create()
     {
         //
     }
 
-    public function store(Request $request): \Illuminate\Http\Response
+    public function store(Request $request)
     {
         //
     }
 
-    public function show(int $id): \Illuminate\Http\Response
+    public function show(int $id)
     {
         //
     }
 
-    public function edit(int $id): \Illuminate\Http\Response
+    public function edit(int $id)
     {
         //
     }
