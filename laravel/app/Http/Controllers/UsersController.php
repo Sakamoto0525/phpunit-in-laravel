@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsersController extends Controller
 {
-    public function index(): \Illuminate\Http\Response
+    /**
+     * \Illuminate\Http\Response
+     */
+    public function index()
     {
-        //
+        return response()->json(User::all(), 200);
     }
 
     public function create(): \Illuminate\Http\Response
