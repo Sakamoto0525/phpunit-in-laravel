@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: API
+  description: |
+    API仕様書
+
+tags:
+  - name: users
+    description: |
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      description: |
+        全ユーザー取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - users
+      description: |
+        ユーザー作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserParams'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{id}:
+    get:
+      tags:
+        - users
+      description: |
+        全ユーザー取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - users
+      description: |
+        ユーザー更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserParams'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - users
+      description: |
+        ユーザー削除
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    CreateUserParams:
+      description: ユーザー作成時のリクエストパラメータ
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    User:
+      description: ユーザー
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        email_verified_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    Users:
+      type: array
+      properties:
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+            email_verified_at:
+              type: string
+            created_at:
+              type: string
+            updated_at:
+              type: string
