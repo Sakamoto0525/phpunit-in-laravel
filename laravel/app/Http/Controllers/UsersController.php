@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\Api\UserCreateRequest;
 
 class UsersController extends Controller
 {
@@ -23,7 +24,7 @@ class UsersController extends Controller
         return response()->json($user, 200);
     }
 
-    public function create(Request $request)
+    public function create(UserCreateRequest $request)
     {
         $user = new User;
         $user->name = $request->input('name');
