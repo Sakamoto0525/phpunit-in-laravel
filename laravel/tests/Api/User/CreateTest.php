@@ -50,4 +50,32 @@ class CreateTest extends TestCase
         $latestUser = User::latest('id')->first(); // order by id desc
         $this->assertSame($user->email, $latestUser->email);
     }
+
+    /**
+     * @test
+     * @dataProvider userCreateDataProvider
+     */
+    public function バリデーションエラー（レスポンス４００）が返ること($name, $email, $password): void
+    {
+        $user = User::factory()->make();
+
+        $params = [
+            'name'     => $name,
+            'email'    => $email,
+            'password' => $password, 
+        ];
+
+        $res = $this->json('POST', '/api/users', $params);
+        $res->assertStatus(400);
+    }
+
+    public function userCreateDataProvider()
+    {
+        return [
+            // 'テストタイトル' => [$name, $email, $password],
+            'nameがnull' => [null, 'test@example.com', 'pass12345@'],
+            'emailがnull' => ['testtaro', null, 'pass12345@'],
+            'passwordがnull' => ['testtaro', 'test@example.com', null],
+        ];
+    }
 }
