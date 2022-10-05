@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,6 +69,30 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function register(Request $req)
+    {
+        $user = new User();
+        $user->name     = $req->name;
+        $user->email    = $req->email;
+        $user->password = bcrypt($req->password);
+        $user->save();
+   
+        $userId = $user->id;
+        $user = User::find($userId);
+
+        $credentials = request(['email', 'password']);
+        if (!$token = auth("api")->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return response()->json([
+            'user'         => $user,
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'expires_in'   => auth()->guard('api')->factory()->getTTL() * 60
         ]);
     }
 }

@@ -21,7 +21,9 @@ use Illuminate\Http\Request;
 
 Route::group(["middleware" => "api"], function () {
     // 認証が必要ないメソッド
-    Route::get('/users', 'UsersController@index');
+    Route::get('users', 'UsersController@index');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('register', 'Auth\RegisterController@register');
     
     Route::group(['middleware' => ['jwt.auth']], function () {
         // 認証が必要なメソッド
