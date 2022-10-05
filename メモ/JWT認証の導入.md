@@ -1,21 +1,7 @@
 # JWT認証の導入
 
-流れ
-1. tymon/jwt-auth インストール
+これが一番わかりやすかった
+というか詰まらずにいけた
 
-## 1. tymon/jwt-auth インストール
+https://www.yuulinux.tokyo/15384/
 
-composer.jsonを下記のように編集し、composer installを行う
-
-```json
-{
-    ...
-    "require": {
-        ...
-        "tymon/jwt-auth": "^1.0" // 追加
-    }
-    ...
-}
-```
-
-## 

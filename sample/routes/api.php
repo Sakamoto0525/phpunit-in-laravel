@@ -17,8 +17,17 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/users', 'UsersController@index');
-Route::get('users/{id}', 'UsersController@show');
-Route::post('users', 'UsersController@create');
-Route::put('users/{id}', 'UsersController@update');
-Route::delete('users/{id}', 'UsersController@delete');
+
+
+Route::group(["middleware" => "api"], function () {
+    // 認証が必要ないメソッド
+    Route::get('/users', 'UsersController@index');
+    
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        // 認証が必要なメソッド
+        Route::get('users/{id}', 'UsersController@show');
+        Route::post('users', 'UsersController@create');
+        Route::put('users/{id}', 'UsersController@update');
+        Route::delete('users/{id}', 'UsersController@delete');
+    });
+});

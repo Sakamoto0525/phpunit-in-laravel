@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests\Api\UserCreateRequest;
+// use App\Http\Requests\Api\UserCreateRequest;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -25,16 +25,16 @@ class UsersController extends Controller
         return response()->json($user, 200);
     }
 
-    public function create(UserCreateRequest $request)
-    {
-        $user = new User;
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->save();
+    // public function create(UserCreateRequest $request)
+    // {
+    //     $user = new User;
+    //     $user->name = $request->input('name');
+    //     $user->email = $request->input('email');
+    //     $user->password = $request->input('password');
+    //     $user->save();
 
-        return response()->json(null, 201);
-    }
+    //     return response()->json(null, 201);
+    // }
 
     public function update(Request $request, int $id)
     {
