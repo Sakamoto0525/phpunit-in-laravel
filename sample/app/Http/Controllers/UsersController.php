@@ -22,7 +22,13 @@ class UsersController extends Controller
         $user = User::find($id);
         if (is_null($user)) return response()->json(null, 404);
 
-        return response()->json($user, 200);
+        return response()->json([
+            'id'         => $user->id,
+            'name'       => $user->name,
+            'email'      => $user->email,
+            'created_at' => $user->created_at,
+            'updated_at' => $user->updated_at,
+        ], 200);
     }
 
     // public function create(UserCreateRequest $request)
